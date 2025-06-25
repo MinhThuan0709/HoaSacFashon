@@ -1,0 +1,563 @@
+:root {
+    --primary-black: #484848;
+    --secondary-black: #333333;
+    --primary-white: #ffffff;
+    --light-gray: #f8f8f8;
+    --border-gray: #e0e0e0;
+    --accent-color: #A0B9C0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-gray);
+    color: var(--secondary-black);
+    overflow-x: hidden;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 0.8em;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+main {
+    padding-top: 0;
+    min-height: 100vh;
+}
+
+.section-content {
+    position: relative;
+    padding: 100px 40px;
+    text-align: center;
+    color: var(--secondary-black);
+    overflow: hidden;
+}
+
+.light-bg {
+    background-color: var(--primary-white);
+}
+
+.section-parallax-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: 0;
+    filter: brightness(0.6);
+}
+
+.section-inner-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.text-centered {
+    text-align: center;
+}
+
+/* Class này chỉ cần để JS xác định, hiệu ứng sẽ do Anime.js xử lý */
+.fade-in-section .fade-in-element {
+    opacity: 0; 
+}
+
+.btn-primary {
+    background-color: var(--primary-black);
+    color: var(--primary-white);
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    margin-top: 30px;
+    /* Thêm cho hiệu ứng gợn sóng */
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-black);
+    transform: translateY(-3px);
+}
+
+.btn-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.7);
+    transform: scale(0);
+    pointer-events: none;
+}
+
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+    margin: 30px auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.grid-item {
+    background-color: var(--primary-white);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+/* --- Các style cho PHẦN TRƯNG BÀY 4 KHUNG HÌNH ẢNH --- */
+.collections-grid-section {
+    background-color: var(--light-gray);
+    padding: 80px 20px;
+}
+
+.collections-grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 40px auto;
+    position: relative;
+    /* SỬA LỖI: Thay thế ảnh nền ở đây */
+    --image-url: url('../src/assets/images/seasons-background.jpg');
+}
+
+.collection-item {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+    cursor: pointer;
+    /* Áp dụng ảnh nền từ biến CSS */
+    background-image: var(--image-url);
+    background-size: 200% 200%;
+    transition: transform 0.5s ease-out, filter 0.5s ease-out;
+    filter: brightness(0.8) grayscale(0.5);
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.collections-grid-container .collection-item:nth-child(1) { background-position: 0% 0%; }
+.collections-grid-container .collection-item:nth-child(2) { background-position: 100% 0%; }
+.collections-grid-container .collection-item:nth-child(3) { background-position: 0% 100%; }
+.collections-grid-container .collection-item:nth-child(4) { background-position: 100% 100%; }
+
+.item-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary-white);
+    transition: opacity 0.5s ease;
+    z-index: 2;
+}
+
+.item-overlay h3 { font-size: 2em; margin-bottom: 10px; text-transform: uppercase; }
+.item-overlay p { font-size: 1.1em; opacity: 0.8; }
+
+.collections-grid-container:hover .collection-item {
+    filter: brightness(0.4) grayscale(1);
+}
+
+.collections-grid-container .collection-item:hover {
+    z-index: 10;
+    filter: brightness(1) grayscale(0);
+    transform: scale(1.1);
+}
+
+/* --- GLOBAL SEASONAL EFFECTS CONTAINER --- */
+#global-seasonal-effect-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.effect-particle {
+    position: absolute;
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Keyframes cho hiệu ứng các mùa... */
+@keyframes flowerFall { /* ... */ }
+@keyframes sunSparkleFall { /* ... */ }
+@keyframes leafFall { /* ... */ }
+@keyframes snowFall { /* ... */ }
+
+/* --- CSS CHO HIỆU ỨNG SCROLLYTELLING (ĐÃ SỬA LỖI) --- */
+.scrolly-story-container {
+    position: relative;
+    /* Tăng chiều cao để có đủ không gian cho chương cuối cùng xuất hiện */
+    height: 400vh; 
+}
+
+.scrolly-images {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--primary-black);
+    /* Thêm z-index để xác định lớp một cách rõ ràng */
+    z-index: 1; 
+}
+
+.scrolly-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    filter: brightness(0.7);
+}
+
+.scrolly-content {
+    position: absolute; /* Thay đổi từ relative sang absolute */
+    top: 0; /* Đặt ở trên cùng */
+    left: 50%; /* Căn giữa */
+    transform: translateX(-50%); /* Căn giữa chính xác */
+    width: 100%;
+    max-width: 650px;
+    color: var(--primary-white);
+    /* Đảm bảo lớp nội dung luôn nằm trên lớp ảnh */
+    z-index: 2; 
+}
+
+.story-chapter {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 40px;
+    opacity: 0;
+}
+
+.story-chapter h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.story-chapter p {
+    font-size: 1.2em;
+    line-height: 1.7;
+    max-width: 500px;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .section-parallax-bg {
+        background-attachment: scroll;
+    }
+    #global-seasonal-effect-container {
+        display: none;
+    }
+    .story-chapter h3 {
+        font-size: 2.2em;
+    }
+    .story-chapter p {
+        font-size: 1em;
+    }
+}
+
+/* --- ĐỊNH DẠNG LẠI CHO SECTION "BỘ SƯU TẬP MÙA HÈ" --- */
+
+/* Thêm một lớp nền mờ tối để chữ luôn nổi bật trên ảnh nền */
+#first-main-section .section-inner-content {
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 60px 40px;
+    border-radius: 4px;
+    color: var(--primary-white); /* Chuyển chữ thành màu trắng để đọc trên nền tối */
+}
+
+/* Định dạng cho tiêu đề "Bộ Sưu Tập Mùa Hè 2025" */
+#first-main-section h2.fade-in-element {
+    font-family: 'Playfair Display', serif; /* Dùng font chữ nghệ thuật giống phần story */
+    font-size: 4.5em; /* TĂNG KÍCH THƯỚC CHỮ LỚN */
+    font-weight: 700;
+    text-transform: uppercase; /* VIẾT HOA toàn bộ tiêu đề */
+    letter-spacing: 3px; /* Tăng khoảng cách giữa các ký tự */
+    line-height: 1.2;
+    margin-bottom: 25px; /* Tăng khoảng cách với đoạn văn bên dưới */
+}
+
+/* Định dạng cho đoạn văn mô tả */
+#first-main-section p.fade-in-element {
+    font-size: 1.4em; /* Tăng kích thước chữ cho đoạn mô tả */
+    max-width: 650px; /* Giới hạn chiều rộng để dễ đọc hơn */
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+    opacity: 0.9; /* Giảm độ sáng một chút để không cạnh tranh với tiêu đề chính */
+}
+
+/* Tinh chỉnh cho màn hình nhỏ */
+@media (max-width: 768px) {
+    #first-main-section h2.fade-in-element {
+        font-size: 3em;
+    }
+    #first-main-section p.fade-in-element {
+        font-size: 1.1em;
+    }
+}
+
+/* --- CSS CHO THANH ĐIỀU HƯỚNG BÊN CẠNH (PHIÊN BẢN CÓ ICON) --- */
+.side-nav {
+    position: fixed;
+    top: 50%;
+    left: 20px; /* Giảm khoảng cách với lề một chút */
+    transform: translateY(-50%);
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.side-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Khoảng cách giữa các mục */
+}
+
+.side-nav .nav-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 50px; /* Bo tròn thành hình con nhộng */
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 44px; /* Chiều rộng ban đầu chỉ đủ cho icon */
+    height: 44px;
+    transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.4s ease;
+    text-decoration: none;
+    overflow: hidden; /* Ẩn text khi co lại */
+}
+
+.side-nav .nav-icon {
+    font-size: 24px;
+    line-height: 1;
+    color: var(--secondary-black);
+    min-width: 28px; /* Giữ icon không bị co lại */
+    transition: color 0.3s ease;
+    /* HOẠT ẢNH LIÊN TỤC CHO ICON */
+    animation: icon-float 3s infinite ease-in-out;
+}
+
+.side-nav .nav-text {
+    white-space: nowrap;
+    margin-left: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--primary-white);
+    opacity: 0; /* Ẩn text ban đầu */
+    transition: opacity 0.2s ease;
+}
+
+/* HIỆU ỨNG KHI HOVER HOẶC ACTIVE */
+.side-nav .nav-item:hover,
+.side-nav .nav-item.active {
+    background-color: var(--primary-black);
+    width: 170px; /* Mở rộng chiều rộng để chứa cả text */
+}
+
+.side-nav .nav-item:hover .nav-text,
+.side-nav .nav-item.active .nav-text {
+    opacity: 1; /* Hiện text khi hover hoặc active */
+    transition-delay: 0.1s;
+}
+
+.side-nav .nav-item:hover .nav-icon,
+.side-nav .nav-item.active .nav-icon {
+    color: var(--primary-white);
+    animation-play-state: paused; /* Dừng hoạt ảnh khi tương tác */
+}
+
+/* KEYFRAMES CHO HOẠT ẢNH ICON */
+@keyframes icon-float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+    100% { transform: translateY(0); }
+}
+
+
+/* --- HIỆU ỨNG 3D CINEMATIC CHO SECTION CÂU CHUYỆN THIẾT KẾ --- */
+.cinematic-section {
+    perspective: 1200px; /* Tạo độ sâu cho không gian 3D */
+}
+
+.cinematic-element {
+    opacity: 0; /* Ban đầu ẩn các phần tử */
+    transform-style: preserve-3d; /* Cho phép các phần tử con có không gian 3D */
+}
+
+.cinematic-element.title {
+    transform: translateY(50px) translateZ(-300px) rotateX(30deg);
+    transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1), opacity 1s ease-out;
+}
+
+.cinematic-element.paragraph:nth-child(even) {
+    transform: translateX(-100px) translateZ(-200px) rotateY(-20deg);
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.2s ease-out;
+}
+
+.cinematic-element.paragraph:nth-child(odd) {
+    transform: translateX(100px) translateZ(-200px) rotateY(20deg);
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.2s ease-out;
+}
+
+.cinematic-element.image {
+    transform: translateZ(-500px) rotateY(15deg) scale(0.8);
+    transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.5s ease-out;
+}
+
+.cinematic-section.in-view .cinematic-element {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0) scale(1); /* Reset transform khi vào view */
+}
+/* --- HIỆU ỨNG 3D CHUYỂN ĐỔI HÌNH ẢNH FULL MÀN HÌNH --- */
+/* --- HIỆU ỨNG 3D CAROUSEL CINEMATIC (PHIÊN BẢN NÂNG CẤP) --- */
+/*
+===================================================================
+--- HIỆU ỨNG 3D CAROUSEL CINEMATIC (BẮT ĐẦU KHỐI MÃ MỚI) ---
+===================================================================
+*/
+
+.full-screen-image-section {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Tăng perspective để hiệu ứng 3D sâu và mượt hơn */
+    perspective: 2500px; 
+}
+
+.full-screen-image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.full-screen-image {
+    position: absolute;
+    /* Đặt kích thước ảnh nhỏ hơn một chút để tạo không gian xung quanh */
+    width: 60vw; 
+    height: 75vh;
+    top: 12.5vh;
+    left: 20vw;
+    object-fit: cover;
+    border-radius: 8px; /* Thêm bo góc cho mềm mại */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3); /* Đổ bóng tạo chiều sâu */
+    /* Thêm bộ lọc để tăng tính điện ảnh */
+    filter: brightness(0.7) blur(2px); 
+    will-change: transform, opacity, filter;
+    /* Transition để hiệu ứng mượt mà khi snap */
+    transition: filter 0.5s ease, opacity 0.5s ease;
+}
+
+/* LƯU Ý: Chúng ta không cần class .active nữa vì GSAP sẽ trực tiếp
+   điều khiển filter và opacity, giúp hiệu ứng mượt mà hơn.
+*/
+
+/* Nâng cấp CSS cho khối văn bản trong section 3D */
+.full-screen-image-section .section-inner-content.text-centered {
+    position: relative; 
+    z-index: 10;
+    color: var(--primary-white); /* Chữ màu trắng */
+    
+    /* Nền trong suốt */
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+
+    /* Thêm bóng đổ để chữ luôn nổi bật */
+    text-shadow: 0 2px 15px rgba(0, 0, 0, 0.6); 
+
+    /* Thêm transition để hiệu ứng ẩn/hiện mượt mà hơn */
+    transition: opacity 0.4s ease-out; 
+    pointer-events: none; /* Cho phép tương tác với các phần tử bên dưới nếu có */
+}
+
+/*
+===================================================================
+--- (KẾT THÚC KHỐI MÃ MỚI) ---
+===================================================================
+*/
+/* Văn bản nằm trên cùng */
+.cinematic-element.title,
+.cinematic-element.paragraph {
+    color: var(--primary-black);
+}
